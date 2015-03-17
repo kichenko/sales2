@@ -1,0 +1,19 @@
+﻿<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="ru.kichenko.sales.model.Sale" table="sale">
+        <id name="id" column="id" type="java.lang.Long">
+            <generator class="sequence">
+                <param name="sequence">seq_sale</param>
+            </generator>
+        </id>
+        <property name="date" column="sale_date" type="org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime"/>
+        <bag name="items" table="item" inverse="true" cascade="all" lazy="true">
+            <key column="sale_id" not-null="true"/>
+            <one-to-many class="ru.kichenko.sales.model.Item"/>
+        </bag>
+    </class>
+</hibernate-mapping>
